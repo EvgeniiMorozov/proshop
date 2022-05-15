@@ -29,7 +29,7 @@ function ProductScreen() {
   }, [dispatch, id]);
 
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?qty=${qty}`);
+    navigate(`/cart/${id}?qty=${qty}`, { replace: true });
   };
 
   return (
