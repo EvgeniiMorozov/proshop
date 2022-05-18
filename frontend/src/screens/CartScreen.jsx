@@ -18,8 +18,19 @@ function CartScreen() {
   const navigate = useNavigate();
   const params = useParams();
   const productId = params.id;
-  const qty = location.search;
-  console.log(qty);
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+  console.log("cartItems:", cartItems);
+
+  useEffect(() => {
+    if (productId) {
+      dispatch(addToCart(productId, qty));
+    }
+  }, [dispatch, productId, qty]);
 
   return <div>Cart</div>;
 }
