@@ -16,6 +16,7 @@ mypy = "*"
 black = "*"
 flake8 = "*"
 django-stubs = "*"
+isort = "*"
 
 [requires]
 python_version = "3.9"
