@@ -6,3 +6,4 @@ django_settings_module = "core.settings"
 
 [tool.isort]
 profile = "black"
+known_first_party = ["api"]
