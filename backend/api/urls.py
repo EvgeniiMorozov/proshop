@@ -6,12 +6,18 @@ from .views import (
     get_products,
     get_routes,
     get_user_profile,
+    get_users,
 )
 
 urlpatterns = [
     path("", get_routes, name="Route"),
     path("products/", get_products, name="Products"),
     path("products/<str:pk>/", get_product, name="Product"),
-    path("users/login/", MyTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path(
+        "users/login/",
+        MyTokenObtainPairView.as_view(),
+        name="token_obtain_pair",
+    ),
     path("users/profile/", get_user_profile, name="users-profile"),
+    path("users/", get_users, name="users"),
 ]
