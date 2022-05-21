@@ -19,11 +19,7 @@ urlpatterns = [
         MyTokenObtainPairView.as_view(),
         name="token_obtain_pair",
     ),
-    path(
-        "users/register/",
-        register_user,
-        name="register",
-    ),
+    path("users/register/", register_user, name="register"),
     path("users/profile/", get_user_profile, name="users-profile"),
     path("users/", get_users, name="users"),
 ]
