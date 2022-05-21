@@ -1,14 +1,17 @@
 from django.urls import path
 
-from .views import MyTokenObtainPairView, get_product, get_products, get_routes
+from .views import (
+    MyTokenObtainPairView,
+    get_product,
+    get_products,
+    get_routes,
+    get_user_profile,
+)
 
 urlpatterns = [
     path("", get_routes, name="Route"),
     path("products/", get_products, name="Products"),
     path("products/<str:pk>/", get_product, name="Product"),
-    path(
-        "users/login/",
-        MyTokenObtainPairView.as_view(),
-        name="token_obtain_pair",
-    ),
+    path("users/login/", MyTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("users/profile/", get_user_profile, name="users-profile"),
 ]
