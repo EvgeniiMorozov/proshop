@@ -13,9 +13,7 @@ from api.serializers import UserSerializer, UserSerializerWithToken
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-
         serializer = UserSerializerWithToken(self.user).data
-
         for k, v in serializer.items():
             data[k] = v
 
@@ -47,7 +45,7 @@ def register_user(request):
 @permission_classes([IsAuthenticated])
 def update_user_profile(request):
     user = request.user
-    serializer = UserSerializer(user, many=False)
+    serializer = UserSerializerWithToken(user, many=False)
     data = request.data
     user.first_name = data["name"]
     user.username = data["email"]
@@ -63,7 +61,7 @@ def update_user_profile(request):
 @permission_classes([IsAuthenticated])
 def get_user_profile(request):
     user = request.user
-    serializer = UserSerializerWithToken(user, many=False)
+    serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
 
