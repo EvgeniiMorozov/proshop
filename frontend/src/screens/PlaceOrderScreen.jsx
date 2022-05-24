@@ -5,8 +5,23 @@ import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 
-function PlaceOrderScreen(props) {
+function PlaceOrderScreen() {
   const cart = useSelector((state) => state.cart);
+
+  cart.itemsPrice = cart.cartItems
+    .reduce((acc, item) => acc + item.price * item.qty, 0)
+    .toFixed();
+  cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2);
+  cart.taxPrice = (0.082 * cart.itemsPrice).toFixed(2);
+  cart.totalPrice = (
+    Number(cart.itemsPrice) +
+    Number(cart.shippingPrice) +
+    Number(cart.taxPrice)
+  ).toFixed(2);
+
+  const placeOrder = () => {
+    console.log("Place order");
+  };
 
   return (
     <div>
@@ -33,12 +48,12 @@ function PlaceOrderScreen(props) {
               </p>
             </ListGroup.Item>
 
-            <ListGroup.Item variant="flush">
+            <ListGroup.Item>
               <h2>Order Items</h2>
               {cart.cartItems.length === 0 ? (
                 <Message variant="info">Your cart is empty</Message>
               ) : (
-                <ListGroup.Item variant="flush">
+                <ListGroup variant="flush">
                   {cart.cartItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
@@ -62,12 +77,61 @@ function PlaceOrderScreen(props) {
                       </Row>
                     </ListGroup.Item>
                   ))}
-                </ListGroup.Item>
+                </ListGroup>
               )}
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={4}></Col>
+        <Col md={4}>
+          <Card>
+            <ListGroup variant="flush">
+              <ListGroup.Item>
+                <h2>Order Summary</h2>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <Row>
+                  <Col>Items:</Col>
+                  <Col>${cart.itemsPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <Row>
+                  <Col>Shipping:</Col>
+                  <Col>${cart.shippingPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <Row>
+                  <Col>Tax:</Col>
+                  <Col>${cart.taxPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <Row>
+                  <Col>Total:</Col>
+                  <Col>${cart.totalPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <div className="d-grid gap-2">
+                  <Button
+                    type="button"
+                    className="btn"
+                    disabled={cart.cartItems === 0}
+                    onClick={placeOrder}
+                  >
+                    Place Order
+                  </Button>
+                </div>
+              </ListGroup.Item>
+            </ListGroup>
+          </Card>
+        </Col>
       </Row>
     </div>
   );
