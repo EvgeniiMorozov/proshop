@@ -7,7 +7,7 @@ from api.models import Order, OrderItem, Product, ShippingAddress
 from api.serializers import OrderSerializer, ProductSerializer
 
 
-@api_view("POST")
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def add_order_items(request):
     user = request.user
