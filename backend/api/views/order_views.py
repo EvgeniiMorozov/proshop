@@ -17,10 +17,11 @@ def add_order_items(request):
         return Response(
             {"detail": "No Order Items"}, status=status.HTTP_400_BAD_REQUEST
         )
+
     # (1) Create order
     order = Order.objects.create(
         user=user,
-        paymentMethod=data["paymentMethod"],
+        payment_method=data["paymentMethod"],
         taxPrice=data["taxPrice"],
         shippingPrice=data["shippingPrice"],
         totalPrice=data["totalPrice"],
@@ -48,6 +49,6 @@ def add_order_items(request):
         # (4) Update stock
         product.countInStock -= item.qty
         product.save()
-    serializer = OrderSerializer(order, many=False)
 
+    serializer = OrderSerializer(order, many=False)
     return Response(serializer.data)
