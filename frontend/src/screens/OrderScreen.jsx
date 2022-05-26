@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
+import { Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getOrderDetails } from "../actions/orderActions";
@@ -9,7 +9,6 @@ import { getOrderDetails } from "../actions/orderActions";
 function OrderScreen() {
   const params = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, error, loading } = orderDetails;
   const orderId = params.id;
