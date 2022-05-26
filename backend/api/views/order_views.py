@@ -54,7 +54,7 @@ def add_order_items(request):
     return Response(serializer.data)
 
 
-@api_view(["POST"])
+@api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_order_by_id(request, pk):
     user = request.user
@@ -70,6 +70,6 @@ def get_order_by_id(request, pk):
             )
     except Exception:
         return Response(
-            {"detail": "Order does not exists"},
+            {"detail": "Order does not exist"},
             status=status.HTTP_400_BAD_REQUEST,
         )
