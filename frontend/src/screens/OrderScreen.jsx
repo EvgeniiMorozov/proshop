@@ -9,9 +9,8 @@ import { getOrderDetails, payOrder } from "../actions/orderActions";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
 function OrderScreen() {
-  const params = useParams();
+  const { id: orderId } = useParams();
   const dispatch = useDispatch();
-  const orderId = params.id;
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, error, loading } = orderDetails;
