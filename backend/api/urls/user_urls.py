@@ -2,6 +2,7 @@ from django.urls import path
 
 from api.views.user_views import (
     MyTokenObtainPairView,
+    delete_user,
     get_user_profile,
     get_users,
     register_user,
@@ -18,4 +19,5 @@ urlpatterns = [
     path("profile/", get_user_profile, name="users-profile"),
     path("profile/update/", update_user_profile, name="users-profile-update"),
     path("", get_users, name="users"),
+    path("delete/<str:pk>/", delete_user, name="user-delete"),
 ]
