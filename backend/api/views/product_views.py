@@ -41,7 +41,6 @@ def create_product(request):
         countInStock=0,
         category="Sample category",
         description="",
-        rating=3,
     )
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
