@@ -10,6 +10,7 @@ pillow = "*"
 django-environ = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
+django-extensions = "*"
 
 [dev-packages]
 mypy = "*"
