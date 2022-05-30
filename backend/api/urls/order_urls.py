@@ -8,8 +8,8 @@ from api.views.order_views import (
 )
 
 urlpatterns = [
-    path("add/", add_order_items, name="orders-add"),
-    path("my-orders/", get_user_orders, name="my-orders"),
-    path("<str:pk>/", get_order_by_id, name="user-order"),
     path("<str:pk>/pay/", update_order_to_paid, name="pay"),
+    path("<str:pk>/", get_order_by_id, name="user-order"),
+    path("my-orders/", get_user_orders, name="my-orders"),
+    path("add/", add_order_items, name="orders-add"),
 ]
