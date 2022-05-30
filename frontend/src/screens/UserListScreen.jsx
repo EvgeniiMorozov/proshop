@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Table, Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { listUsers, deleteUser } from "../actions/userActions";
+import { deleteUser, listUsers } from "../actions/userActions";
 
 function UserListScreen() {
   const dispatch = useDispatch();
