@@ -5,12 +5,13 @@ from api.views.product_views import (
     delete_product,
     get_product,
     get_products,
+    update_product,
 )
 
 urlpatterns = [
-    path("", get_products, name="products"),
-    path("<str:pk>/", get_product, name="product"),
-    path("create/", create_product, name="product-create"),
-    path("update/<str:pk>/", delete_product, name="product-update"),
+    path("update/<str:pk>/", update_product, name="product-update"),
     path("delete/<str:pk>/", delete_product, name="product-delete"),
+    path("create/", create_product, name="product-create"),
+    path("<str:pk>/", get_product, name="product"),
+    path("", get_products, name="products"),
 ]
