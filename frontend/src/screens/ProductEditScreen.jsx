@@ -56,12 +56,13 @@ function ProductEditScreen() {
     dispatch(
       updateProduct({
         _id: productId,
-        name,
-        image,
-        brand,
-        category,
-        countInStock,
-        description,
+        name: name,
+        price: price,
+        image: image,
+        brand: brand,
+        category: category,
+        countInStock: countInStock,
+        description: description,
       })
     );
   };

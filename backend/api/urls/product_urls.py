@@ -9,8 +9,8 @@ from api.views.product_views import (
 )
 
 urlpatterns = [
-    path("update/<str:pk>/", update_product, name="product-update"),
-    path("delete/<str:pk>/", delete_product, name="product-delete"),
+    path("update/<int:pk>/", update_product, name="product-update"),
+    path("delete/<int:pk>/", delete_product, name="product-delete"),
     path("create/", create_product, name="product-create"),
     path("<str:pk>/", get_product, name="product"),
     path("", get_products, name="products"),
