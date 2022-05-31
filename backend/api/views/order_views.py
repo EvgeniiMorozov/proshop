@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 from api.models import Order, OrderItem, Product, ShippingAddress
-from api.serializers import OrderSerializer, ProductSerializer
+from api.serializers import OrderSerializer
 
 
 @api_view(["POST"])
@@ -92,5 +92,13 @@ def update_order_to_paid(request, pk):
 def get_user_orders(request):
     user = request.user
     orders = user.order_set.all()
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAdminUser])
+def get_orders(request):
+    orders = Order.objects.all()
     serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
