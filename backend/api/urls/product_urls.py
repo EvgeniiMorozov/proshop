@@ -6,12 +6,14 @@ from api.views.product_views import (
     get_product,
     get_products,
     update_product,
+    upload_image,
 )
 
 urlpatterns = [
     path("update/<int:pk>/", update_product, name="product-update"),
     path("delete/<int:pk>/", delete_product, name="product-delete"),
+    path("upload/", upload_image, name="image-upload"),
     path("create/", create_product, name="product-create"),
-    path("<str:pk>/", get_product, name="product"),
+    path("<int:pk>/", get_product, name="product"),
     path("", get_products, name="products"),
 ]
