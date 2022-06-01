@@ -184,7 +184,7 @@ export const createProductReview =
       };
 
       const { data } = await axios.post(
-        `/api/products/update/${productId}/`,
+        `/api/products/${productId}/reviews/`,
         review,
         config
       );
