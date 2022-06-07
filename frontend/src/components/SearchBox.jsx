@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Button, Form, FormControl } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Button, Form } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function SearchBox() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [keyword, setKeyword] = useState("");
 
@@ -12,19 +13,21 @@ function SearchBox() {
     if (keyword) {
       navigate(`/?keyword=${keyword}`);
     } else {
-      // navigate()
+      navigate(navigate(location.pathname));
     }
   };
   return (
     <Form className="d-flex" onSubmit={submitHandler}>
-      <FormControl
-        type="search"
+      <Form.Control
+        type="text"
+        name="searchBox"
         placeholder="Search"
         className="me-2"
-        aria-label="Search"
         onChange={(e) => setKeyword(e.target.value)}
-      />
-      <Button variant="outline-success">Search</Button>
+      ></Form.Control>
+      <Button type="submit" variant="outline-success">
+        Search
+      </Button>
     </Form>
   );
 }
