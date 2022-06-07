@@ -7,12 +7,6 @@ from rest_framework.response import Response
 from api.models import Product, Review
 from api.serializers import ProductSerializer
 
-# @api_view(["GET"])
-# def get_products(request):
-#     products = Product.objects.all()
-#     serializer = ProductSerializer(products, many=True)
-#     return Response(serializer.data)
-
 
 @api_view(["GET"])
 def get_products(request):
@@ -21,40 +15,29 @@ def get_products(request):
         query = ""
 
     products = Product.objects.filter(name__icontains=query)
+
+    page = request.query_params.get("page")
+    paginator = Paginator(products, 5)
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
+    if page is None:
+        page = 1
+
+    page = int(page)
+
     serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
-
-
-# @api_view(["GET"])
-# def get_products(request):
-#     query = request.query_params.get("keyword")
-#     print("query: ", query)
-#     if query is None:
-#         query = ""
-#     products = Product.objects.filter(name__icontains=query)
-#
-#     page = request.query_params.get("page")
-#     paginator = Paginator(products, 2)
-#     try:
-#         products = paginator.page(page)
-#     except PageNotAnInteger:
-#         products = paginator.page(1)
-#     except EmptyPage:
-#         products = paginator.page(paginator.num_pages)
-#
-#     if page is None:
-#         page = 1
-#
-#     page = int(page)
-#
-#     serializer = ProductSerializer(products, many=True)
-#     return Response(
-#         {
-#             "products": serializer.data,
-#             "page": page,
-#             "pages": paginator.num_pages,
-#         }
-#     )
+    return Response(
+        {
+            "products": serializer.data,
+            "page": page,
+            "pages": paginator.num_pages,
+        }
+    )
 
 
 @api_view(["GET"])
