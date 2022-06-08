@@ -102,7 +102,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "client"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -173,7 +173,10 @@ MEDIA_URL = "/images/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-STATICFILES_DIRS = [BASE_DIR / "backend" / "static"]
+STATICFILES_DIRS = [
+    BASE_DIR / "backend" / "static",
+    BASE_DIR / "client" / "static",
+]
 
 MEDIA_ROOT = "static/images"
 
