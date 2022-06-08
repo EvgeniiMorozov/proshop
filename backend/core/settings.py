@@ -18,6 +18,8 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+REACT_BUILD = BASE_DIR.parent / "frontend" / "build"
+
 DOTENV_PATH = BASE_DIR.parent / ".envs"
 
 env = environ.Env()
@@ -102,7 +104,8 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "client"],
+        # "DIRS": [BASE_DIR / "client"],
+        "DIRS": [REACT_BUILD],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -175,7 +178,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATICFILES_DIRS = [
     BASE_DIR / "backend" / "static",
-    BASE_DIR / "client" / "static",
+    REACT_BUILD / "static",
 ]
 
 MEDIA_ROOT = "static/images"
