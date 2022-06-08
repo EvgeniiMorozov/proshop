@@ -535,3 +535,4 @@ $RECYCLE.BIN/
 
 **/.local
 /.envs/.local_front
+/backend/client/
