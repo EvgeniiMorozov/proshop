@@ -65,9 +65,14 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
+    createdAt = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Review
         fields = "__all__"
+
+    def get_createdAt(self, obj):
+        return obj.created_at
 
 
 class ShippingAddressSerializer(serializers.ModelSerializer):
