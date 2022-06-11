@@ -40,11 +40,23 @@ class UserSerializerWithToken(UserSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    numReviews = serializers.SerializerMethodField(read_only=True)
+    countInStock = serializers.SerializerMethodField(read_only=True)
+    createdAt = serializers.SerializerMethodField(read_only=True)
     reviews = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Product
         fields = "__all__"
+
+    def get_numReviews(self, obj):
+        return obj.num_reviews
+
+    def get_countInSctock(self, obj):
+        return obj.count_in_stock
+
+    def get_createdAt(self, obj):
+        return obj.created_at
 
     def get_reviews(self, obj):
         reviews = obj.review_set.all()
