@@ -23,8 +23,7 @@ class Product(BaseModel):
         return self.name
 
 
-class Review(models.Model):
-    _id = models.AutoField(primary_key=True, editable=False)
+class Review(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
