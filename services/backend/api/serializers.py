@@ -76,9 +76,18 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class ShippingAddressSerializer(serializers.ModelSerializer):
+    postalCode = serializers.SerializerMethodField(read_only=True)
+    shippingPrice = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = ShippingAddress
         fields = "__all__"
+
+    def get_postalCode(self, obj):
+        return obj.postal_code
+
+    def get_shippingPrice(self, obj):
+        return obj.shipping_price
 
 
 class OrderSerializer(serializers.ModelSerializer):
