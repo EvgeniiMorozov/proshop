@@ -52,7 +52,7 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_numReviews(self, obj):
         return obj.num_reviews
 
-    def get_countInSctock(self, obj):
+    def get_countInStock(self, obj):
         return obj.count_in_stock
 
     def get_createdAt(self, obj):

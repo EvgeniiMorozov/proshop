@@ -2,11 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class BaseModel(models.Model):
+class Product(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
-
-
-class Product(BaseModel):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, default="/sample.jpg")
@@ -23,7 +20,8 @@ class Product(BaseModel):
         return self.name
 
 
-class Review(BaseModel):
+class Review(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -35,7 +33,8 @@ class Review(BaseModel):
         return str(self.rating)
 
 
-class Order(BaseModel):
+class Order(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     payment_method = models.CharField(max_length=200, null=True, blank=True)
     tax_price = models.DecimalField(
