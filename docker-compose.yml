@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  proshop_db:
+    build: ./services/postgres
+    restart: always
+    env_file:
+      - ./services/.envs/.env.development.local
+    environment:
+      POSTGRES_PASSWORD: SQL_PASSWORD
+      POSTGRES_USER: SQL_USER
+      POSTGRES_DB: SQL_DATABASE
+      PGDATA: ./services/postgres/data
+      POSTGRES_INITDB_ARGS: "-A md5"
+    ports:
+      - "5432:5432"
