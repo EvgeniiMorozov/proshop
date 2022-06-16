@@ -23,7 +23,7 @@ REACT_BUILD = BASE_DIR.parent / "frontend" / "build"
 DOTENV_PATH = BASE_DIR.parent / ".envs"
 
 env = environ.Env()
-env.read_env(str(DOTENV_PATH / ".local"))
+env.read_env(str(DOTENV_PATH / ".env.development.local"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
