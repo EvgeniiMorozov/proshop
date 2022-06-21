@@ -30,7 +30,17 @@ services:
     command: gunicorn core.wsgi
     volumes:
       - ./services/backend/:/usr/src/app/
-    ports:
-      - "8000:8000"
+    # ports:
+    #   - "8000:8000"
+    expose:
+      - 8000
     depends_on:
       - pg_database
+
+  nginx:
+    container_name: nginx
+    build: ./services/nginx
+    ports:
+      - "1337:80"
+    depends_on:
+      - backend
