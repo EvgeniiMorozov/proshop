@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  proshop_db:
+  pg_database:
     container_name: proshop_db
     build: ./services/postgres
     restart: always
@@ -19,3 +19,17 @@ services:
       - services/.envs/.pgadmin.env
     ports:
       - "5050:80"
+
+  backend:
+    container_name: django
+    build: ./services/backend
+    env_file:
+      - ./services/.envs/.env.development.local
+      - ./services/.envs/.pg.env
+    command: python manage.py runserver
+    volumes:
+      - ./services/backend/:/usr/src/app/
+    ports:
+      - "7000:8000"
+    depends_on:
+      - pg_database
