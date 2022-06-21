@@ -6,7 +6,7 @@ services:
     build: ./services/postgres
     restart: always
     env_file:
-      - ./services/postgres/.pg.env
+      - services/.envs/.pg.env
     volumes:
       - ./services/postgres/postgres_data:/var/lib/postgresql/data/
     ports:
@@ -16,6 +16,6 @@ services:
     container_name: pgadmin
     image: dpage/pgadmin4
     env_file:
-      - ./services/postgres/.pgadmin.env
+      - services/.envs/.pgadmin.env
     ports:
       - "5050:80"

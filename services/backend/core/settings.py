@@ -24,6 +24,7 @@ DOTENV_PATH = BASE_DIR.parent / ".envs"
 
 env = environ.Env()
 env.read_env(str(DOTENV_PATH / ".env.development.local"))
+env.read_env(str(DOTENV_PATH / ".pg.env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -124,10 +125,21 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": env("POSTGRES_DB"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": "127.0.0.1",
+        "PORT": env("POSTGRES_PORT"),
     }
 }
 
@@ -177,7 +189,7 @@ MEDIA_URL = "/images/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "backend" / "static",
+    BASE_DIR / "static",
     REACT_BUILD / "static",
 ]
 
