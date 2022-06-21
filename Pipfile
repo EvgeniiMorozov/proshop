@@ -12,6 +12,7 @@ django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 django-extensions = "*"
 psycopg2-binary = "*"
+gunicorn = "*"
 
 [dev-packages]
 mypy = "*"

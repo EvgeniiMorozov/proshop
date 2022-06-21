@@ -26,10 +26,11 @@ services:
     env_file:
       - ./services/.envs/.env.development.local
       - ./services/.envs/.pg.env
-    command: python manage.py runserver
+    # command: python manage.py runserver
+    command: gunicorn core.wsgi
     volumes:
       - ./services/backend/:/usr/src/app/
     ports:
-      - "7000:8000"
+      - "8000:8000"
     depends_on:
       - pg_database
