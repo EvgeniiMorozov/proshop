@@ -538,5 +538,5 @@ $RECYCLE.BIN/
 /backend/client/
 **/.env.dev
 /services/postgres/postgres_data/
-/services/postgres/.pg.env
-/services/postgres/.pgadmin.env
+/services/.envs/.pg.env
+/services/.envs/.pgadmin.env
