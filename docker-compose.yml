@@ -27,7 +27,7 @@ services:
       - ./services/.envs/.env.development.local
       - ./services/.envs/.pg.env
     # command: python manage.py runserver
-    command: gunicorn core.wsgi
+    command: gunicorn core.wsgi --bind 0.0.0.0:8000
     volumes:
       - ./services/backend/:/usr/src/app/
     # ports:
