@@ -2,35 +2,13 @@ version: "3"
 
 services:
   backend:
-    container_name: django
-    build: ./services/backend
-    restart: unless-stopped
-    env_file:
-      - ./services/.envs/.env.development.local
-      - ./services/.envs/.pg.env
     volumes:
       - ./services/backend:./usr/src/app
-    expose:
-      - 8000
-    depends_on:
-      - proshop_db
 
   pg_database:
-    container_name: proshop_db
-    build: ./services/postgres
-    restart: unless-stopped
-    env_file:
-      - services/.envs/.pg.env
     volumes:
       - ./services/postgres/postgres_data:/var/lib/postgresql/data/
-    ports:
-      - "5432:5432"
 
-  pg_admin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    restart: unless-stopped
-    env_file:
-      - services/.envs/.pgadmin.env
-    ports:
-      - "5050:80"
+  nginx:
+    volumes:
+      - ./services/nginx:/etc/nginx/conf.d
