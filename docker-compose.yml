@@ -39,6 +39,16 @@ services:
     depends_on:
       - "pg_database"
 
+  frontend:
+    build: ./services/frontend
+    container_name: react
+    command: npm run start
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
   nginx:
     container_name: nginx
     build: ./services/nginx
